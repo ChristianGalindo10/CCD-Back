@@ -37,11 +37,11 @@ public class Restaurante {
 	@Column(name = "n_especialidad")
 	private String especialidad;
 	
-	@OneToMany(mappedBy = "Restaurante",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "restaurante",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Menu> menus;
 	
-	@OneToMany(mappedBy = "Restaurante",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "restaurante",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Restaurante_Producto> restaurante_productos;
     

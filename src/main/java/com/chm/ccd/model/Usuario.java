@@ -43,7 +43,7 @@ public class Usuario {
 	@Column(name = "p_correo", unique = true)
 	private String email;
 	
-	@OneToMany(mappedBy = "Usuario",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "usuario",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Pedido> pedidos;
 	

@@ -52,7 +52,7 @@ public class Menu {
 	@JsonBackReference
     private Restaurante restaurante;
 	
-	@OneToMany(mappedBy = "Ingrediente",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "menu",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Pedido_Menu> pedidos_menus;
     

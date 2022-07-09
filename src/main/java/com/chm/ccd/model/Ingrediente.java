@@ -35,7 +35,7 @@ public class Ingrediente {
 	@Column(name = "n_nombre", unique = true)
 	private String nombre;
 	
-	@OneToMany(mappedBy = "Ingrediente",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "ingrediente",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Producto_Ingrediente> producto_ingredientes;
 	

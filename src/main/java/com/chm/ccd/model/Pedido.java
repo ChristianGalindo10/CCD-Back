@@ -48,11 +48,11 @@ public class Pedido {
 	@JsonBackReference
 	private Usuario usuario;
 
-	@OneToMany(mappedBy = "Pedido", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private List<Pedido_Producto> pedidos_productos;
 	
-	@OneToMany(mappedBy = "Pedido", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private List<Pedido_Menu> pedidos_menus;
 	

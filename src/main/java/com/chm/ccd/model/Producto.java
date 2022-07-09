@@ -47,15 +47,15 @@ public class Producto {
 	@Column(name = "i_foto", length = 10000)
 	private byte[] picByte;
 	
-	@OneToMany(mappedBy = "Producto",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "producto",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Producto_Ingrediente> producto_ingredientes;
     
-    @OneToMany(mappedBy = "Producto",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "producto",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Restaurante_Producto> restaurante_productos;
     
-    @OneToMany(mappedBy = "Producto",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "producto",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Pedido_Producto> pedidos_productos;
     
