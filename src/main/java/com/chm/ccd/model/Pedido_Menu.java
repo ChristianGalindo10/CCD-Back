@@ -29,12 +29,12 @@ public class Pedido_Menu {
     private Integer cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "pk_idMenu")
+    @JoinColumn(name = "pk_idMenu",insertable = false, updatable = false)
     @JsonBackReference
     private Menu menu;
 
     @ManyToOne
-    @JoinColumn(name = "pk_idPedido")
+    @JoinColumn(name = "pk_idPedido",insertable = false, updatable = false)
     @JsonBackReference
     private Pedido pedido;
 }

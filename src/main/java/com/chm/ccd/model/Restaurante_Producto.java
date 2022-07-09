@@ -32,12 +32,12 @@ public class Restaurante_Producto {
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "pk_idProducto")
+    @JoinColumn(name = "pk_idProducto",insertable = false, updatable = false)
     @JsonBackReference
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(name = "pk_nit")
+    @JoinColumn(name = "pk_nit",insertable = false, updatable = false)
     @JsonBackReference
     private Restaurante restaurante;
 

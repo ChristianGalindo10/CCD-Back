@@ -1,6 +1,8 @@
 package com.chm.ccd.ids;
 
-public class Pedido_Producto_Id {
+import java.io.Serializable;
+
+public class Pedido_Producto_Id implements Serializable{
 	
 	private Integer idPedido;
 	private Integer idProducto;
