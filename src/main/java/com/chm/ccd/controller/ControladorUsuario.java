@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import com.chm.ccd.db.RepositorioUsuario;
 import com.chm.ccd.model.Usuario;
@@ -27,6 +29,10 @@ public class ControladorUsuario {
 	@Autowired
 	private RepositorioUsuario repositorioUsuario;
 	
+	@Autowired
+    PasswordEncoder passwordEncoder;
+
+	
 	@GetMapping("/get")
 	public List<Usuario> getUsers() {
 		return repositorioUsuario.findAll();
@@ -34,7 +40,10 @@ public class ControladorUsuario {
 	
 	@PostMapping("/add")
 	public ResponseEntity<?> createUser(@RequestBody Usuario usuario) throws IOException {
-		repositorioUsuario.save(usuario);
+		/*Usuario nuevoUsuario =
+                new Usuario(usuario.getName(),usuario.getCelular(),usuario.getTipo(),passwordEncoder.encode(usuario.getPassword()));*/
+		Usuario nuevoUsuario = new Usuario(usuario.getName(),usuario.getCelular(),usuario.getTipo(),usuario.getPassword());
+		repositorioUsuario.save(nuevoUsuario);
 		return new ResponseEntity<Message>(new Message("Usuario guardado"), HttpStatus.CREATED);
 	}
 

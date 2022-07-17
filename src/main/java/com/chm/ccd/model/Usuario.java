@@ -52,7 +52,7 @@ public class Usuario {
 	public Usuario() {	
 	}
 	
-	public Usuario(@NotNull String name,@NotNull Long celular,@NotNull String email ,@NotNull String tipo,@NotNull String password) {
+	public Usuario(@NotNull String name,@NotNull Long celular,@NotNull String tipo,@NotNull String password) {
 		this.name = name;
 		this.celular = celular;
 		//this.email = email;
