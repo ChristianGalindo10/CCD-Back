@@ -27,7 +27,7 @@ import com.sun.istack.NotNull;
 public class Pedido {
 
 	@Id
-	@Column(name = "pk_idPedido")
+	@Column(name = "pk_idpedido")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPedido;
 
