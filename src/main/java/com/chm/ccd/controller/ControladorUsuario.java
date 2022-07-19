@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.chm.ccd.db.RepositorioUsuario;
 import com.chm.ccd.model.Usuario;
 import com.chm.ccd.security.dto.Message;
+import com.chm.ccd.security.dto.UserLogin;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -40,11 +41,25 @@ public class ControladorUsuario {
 	
 	@PostMapping("/add")
 	public ResponseEntity<?> createUser(@RequestBody Usuario usuario) throws IOException {
-		/*Usuario nuevoUsuario =
-                new Usuario(usuario.getName(),usuario.getCelular(),usuario.getTipo(),passwordEncoder.encode(usuario.getPassword()));*/
-		Usuario nuevoUsuario = new Usuario(usuario.getName(),usuario.getCelular(),usuario.getTipo(),usuario.getPassword());
+		Usuario nuevoUsuario =
+                new Usuario(usuario.getName(),usuario.getCelular(),usuario.getTipo(),passwordEncoder.encode(usuario.getPassword()),usuario.getEmail());
+	/*	Usuario nuevoUsuario = new Usuario(usuario.getName(),usuario.getCelular(),usuario.getTipo(),usuario.getPassword(),usuario.getEmail());*/
 		repositorioUsuario.save(nuevoUsuario);
 		return new ResponseEntity<Message>(new Message("Usuario guardado"), HttpStatus.CREATED);
 	}
+	
+	@PostMapping("/auth")
+	public ResponseEntity<?> Login(@RequestBody UserLogin usuarioLogin) throws IOException{
+		if(existsByEmail(usuarioLogin.getEmail())) {
+            return new ResponseEntity(new Message("El usuario ya esta registrado"), HttpStatus.OK);
+		}else {
+            return new ResponseEntity(new Message("El usuario no esta registrado"), HttpStatus.OK);
+		}
+	}
+    public boolean existsByEmail(String email){
+        return repositorioUsuario.existsByEmail(email);
+    }
+	
+	
 
 }

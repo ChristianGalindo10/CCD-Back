@@ -41,9 +41,9 @@ public class Usuario {
 	@Column(name = "p_contrasenia")
 	private String password;
 	
-	//@NotNull
-	//@Column(name = "p_correo", unique = true)
-	//private String email;
+	@NotNull
+	@Column(name = "p_correo", unique = true)
+	private String email;
 	
 	@OneToMany(mappedBy = "usuario",fetch = FetchType.EAGER)
 	@JsonManagedReference
@@ -52,10 +52,10 @@ public class Usuario {
 	public Usuario() {	
 	}
 	
-	public Usuario(@NotNull String name,@NotNull Long celular,@NotNull String tipo,@NotNull String password) {
+	public Usuario(@NotNull String name,@NotNull Long celular,@NotNull String tipo,@NotNull String password, String email) {
 		this.name = name;
 		this.celular = celular;
-		//this.email = email;
+		this.email = email;
 		this.tipo = tipo;
 		this.password = password;
 	}
@@ -108,14 +108,14 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	/*
+	
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}*/
+	}
 
 	
 
