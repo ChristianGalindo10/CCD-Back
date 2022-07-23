@@ -13,16 +13,18 @@ import javax.persistence.Table;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "Restaurante")
+@JsonIgnoreProperties({"pedidos","menus","restaurante_productos"})
 public class Restaurante {
 
 	@Id
 	@Column(name = "pk_nit")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long nit;
 
 	@NotNull
@@ -36,6 +38,14 @@ public class Restaurante {
 	@NotNull
 	@Column(name = "n_especialidad")
 	private String especialidad;
+	
+	@NotNull
+	@Column(name = "p_contraseniarestaurante")
+	private String password;
+	
+	@NotNull
+	@Column(name = "p_correorestaurante", unique = true)
+	private String email;
 	
 	@OneToMany(mappedBy = "restaurante",fetch = FetchType.EAGER)
 	@JsonManagedReference
@@ -51,11 +61,29 @@ public class Restaurante {
 	
 	public Restaurante() {}
 
-	public Restaurante(@NotNull Long nit,@NotNull String nombre,@NotNull Long telefono,@NotNull String especialidad) {
+	public Restaurante(@NotNull Long nit,@NotNull String nombre,@NotNull Long telefono,@NotNull String especialidad,@NotNull String email,@NotNull String password) {
 		this.nit = nit;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.especialidad = especialidad;
+		this.email = email;
+		this.password = password;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Long getNit() {

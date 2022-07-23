@@ -51,9 +51,9 @@ public class ControladorUsuario {
 	@PostMapping("/auth")
 	public ResponseEntity<?> Login(@RequestBody UserLogin usuarioLogin) throws IOException{
 		if(existsByEmail(usuarioLogin.getEmail())) {
-            return new ResponseEntity(new Message("El usuario ya esta registrado"), HttpStatus.OK);
+            return new ResponseEntity<Message>(new Message("El usuario ya esta registrado"), HttpStatus.OK);
 		}else {
-            return new ResponseEntity(new Message("El usuario no esta registrado"), HttpStatus.OK);
+            return new ResponseEntity<Message>(new Message("El usuario no esta registrado"), HttpStatus.OK);
 		}
 	}
     public boolean existsByEmail(String email){
