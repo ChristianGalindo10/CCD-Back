@@ -11,19 +11,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 
 @Entity
 @Table(name = "Ingrediente")
+@JsonIgnoreProperties("producto_ingredientes")
 public class Ingrediente {
 
 	@Id
-	@Column(name = "pk_idIngrediente")
+	@Column(name = "pk_idingrediente")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idIngrediente;
+	private Long idIngrediente;
 
+	@NotNull
 	@Column(name = "q_unidades")
 	private Integer unidades;
 	
@@ -41,7 +44,7 @@ public class Ingrediente {
 	
 	public Ingrediente() {}
 
-	public Ingrediente(Integer unidades,@NotNull String unidadMedida,@NotNull String nombre) {
+	public Ingrediente(@NotNull Integer unidades,@NotNull String unidadMedida,@NotNull String nombre) {
 		this.unidades = unidades;
 		this.unidadMedida = unidadMedida;
 		this.nombre = nombre;
@@ -56,17 +59,14 @@ public class Ingrediente {
 		this.producto_ingredientes = producto_ingredientes;
 	}
 
-	public void setIdIngrediente(Integer idIngrediente) {
+	public void setIdIngrediente(Long idIngrediente) {
 		this.idIngrediente = idIngrediente;
 	}
 
-	public int getIdIngrediente() {
+	public Long getIdIngrediente() {
 		return idIngrediente;
 	}
 
-	public void setIdIngrediente(int idIngrediente) {
-		this.idIngrediente = idIngrediente;
-	}
 
 	public int getUnidades() {
 		return unidades;
