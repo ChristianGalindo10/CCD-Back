@@ -59,7 +59,7 @@ public class Pedido {
 	@JoinTable(
 	        name = "Pedido_Restaurante",
 	        joinColumns = @JoinColumn(name = "pk_nit", nullable = false),
-	        inverseJoinColumns = @JoinColumn(name="pk_idPedido", nullable = false)
+	        inverseJoinColumns = @JoinColumn(name="pk_idpedido", nullable = false)
 	    )
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Restaurante> restaurantes;

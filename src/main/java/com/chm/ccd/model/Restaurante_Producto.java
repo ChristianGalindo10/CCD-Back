@@ -24,7 +24,7 @@ public class Restaurante_Producto {
     private Long nit;
 
     @Id
-    @Column(name = "pk_idProducto")
+    @Column(name = "pk_idproducto")
     private Integer idProducto;
 
     @NotNull
@@ -32,7 +32,7 @@ public class Restaurante_Producto {
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "pk_idProducto",insertable = false, updatable = false)
+    @JoinColumn(name = "pk_idproducto",insertable = false, updatable = false)
     @JsonBackReference
     private Producto producto;
 

@@ -27,7 +27,7 @@ import com.sun.istack.NotNull;
 public class Menu {
 
 	@Id
-	@Column(name = "pk_idMenu")
+	@Column(name = "pk_idmenu")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMenu;
 	
@@ -58,8 +58,8 @@ public class Menu {
     
     @JoinTable(
 	        name = "Producto_Menu",
-	        joinColumns = @JoinColumn(name = "pk_idMenu", nullable = false),
-	        inverseJoinColumns = @JoinColumn(name="pk_idProducto", nullable = false)
+	        joinColumns = @JoinColumn(name = "pk_idmenu", nullable = false),
+	        inverseJoinColumns = @JoinColumn(name="pk_idproducto", nullable = false)
 	    )
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Producto> productos;
