@@ -28,11 +28,11 @@ import com.sun.istack.NotNull;
 public class Producto_Ingrediente {
 
 	@Id
-	@Column(name = "pk_idProducto")
+	@Column(name = "pk_idproducto")
     private Integer idProducto;
 
     @Id
-    @Column(name = "pk_idIngrediente")
+    @Column(name = "pk_idingrediente")
     private Integer idIngrediente;
 
     @NotNull
@@ -40,12 +40,12 @@ public class Producto_Ingrediente {
     private Integer cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "pk_idProducto" ,insertable = false, updatable = false)
+    @JoinColumn(name = "pk_idproducto" ,insertable = false, updatable = false)
     @JsonBackReference
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(name = "pk_idIngrediente", insertable = false, updatable = false)
+    @JoinColumn(name = "pk_idingrediente", insertable = false, updatable = false)
     @JsonBackReference
     private Ingrediente ingrediente;
     

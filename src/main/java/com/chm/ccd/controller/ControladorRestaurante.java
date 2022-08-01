@@ -29,6 +29,8 @@ public class ControladorRestaurante {
 		return repositorioRestaurante.findAll();
 	}
 	
+
+	
 	/*
 	@PostMapping("/add")
 	public ResponseEntity<?> createUser(@RequestBody Restaurante restaurante) throws IOException {

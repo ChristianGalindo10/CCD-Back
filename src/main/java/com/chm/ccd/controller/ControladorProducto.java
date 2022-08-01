@@ -75,14 +75,9 @@ public class ControladorProducto {
 		return outputStream.toByteArray();
 	}
 	@PostMapping("/newproduct")
-	public ResponseEntity<?> nuevoProducto(@Valid @RequestBody Producto nuevoProducto, BindingResult bindingResult){
-		System.out.println("entre");
+	public ResponseEntity<?> nuevoProducto(@RequestParam Long nit,@RequestBody Producto nuevoProducto){
+		System.out.println(nit);
 		nuevoProducto.setPicByte(this.bytes);
-		if(bindingResult.hasErrors())
-            return new ResponseEntity(new Message("campos mal puestos"), HttpStatus.BAD_REQUEST);
-		/*Producto producto =
-                new Producto(nuevoProducto.getNombre(),nuevoProducto.getTipo(),nuevoProducto.isPersonalizable(),nuevoProducto.getPrecio(),nuevoProducto.getPicByte());*/
-	/*	Usuario nuevoUsuario = new Usuario(usuario.getName(),usuario.getCelular(),usuario.getTipo(),usuario.getPassword(),usuario.getEmail());*/
 		productService.save(nuevoProducto);
 		this.bytes = null;
 		return new ResponseEntity<Message>(new Message("Producto guardado"), HttpStatus.CREATED);

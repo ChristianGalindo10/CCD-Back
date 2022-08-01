@@ -33,4 +33,8 @@ public class ServicioRestaurante {
 	public void save(Restaurante restaurante){
 		restaurantRepository.save(restaurante);
     }
+	
+	public Optional<Restaurante> getByName(String name){
+        return restaurantRepository.findByNombre(name);
+    }
 }
