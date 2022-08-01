@@ -1,10 +1,16 @@
 package com.chm.ccd.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.zip.Deflater;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity.BodyBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.method.P;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,14 +22,20 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.chm.ccd.model.Ingrediente;
+import com.chm.ccd.model.Producto;
 import com.chm.ccd.model.Restaurante;
 import com.chm.ccd.model.Usuario;
 import com.chm.ccd.security.dto.JwtDto;
 import com.chm.ccd.security.dto.Message;
 import com.chm.ccd.security.dto.UserLogin;
 import com.chm.ccd.security.jwt.JwtProvider;
+import com.chm.ccd.service.ServicioIngrediente;
+import com.chm.ccd.service.ServicioProducto;
 import com.chm.ccd.service.ServicioRestaurante;
 import com.chm.ccd.service.ServicioUsuario;
 
@@ -42,9 +54,11 @@ public class ControladorAutenticacion {
     
     @Autowired
     ServicioRestaurante restaurantService;
+    
 
     @Autowired
     JwtProvider jwtProvider;
+    
 
     @PostMapping("/newuser")
     public ResponseEntity<?> nuevoUsuario(@Valid @RequestBody Usuario nuevoUsuario, BindingResult bindingResult){
@@ -77,6 +91,7 @@ public class ControladorAutenticacion {
         return new ResponseEntity(new Message("restaurante guardado"), HttpStatus.CREATED);
     }
 
+
     @PostMapping("/login")
 	public ResponseEntity<?> login(@Valid @RequestBody UserLogin loginUsuario, BindingResult bindingResult) {
 		//if (bindingResult.hasErrors())
@@ -89,4 +104,6 @@ public class ControladorAutenticacion {
 		JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
 		return new ResponseEntity(jwtDto, HttpStatus.OK);
 	}
+    
+
 }
