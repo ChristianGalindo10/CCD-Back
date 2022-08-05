@@ -20,5 +20,9 @@ public class ServicioIngrediente {
 	public void save(Ingrediente ingrediente){
 		ingredientRepository.save(ingrediente);
     }
+	
+	public Optional<Ingrediente> getByName(String name){
+		return ingredientRepository.findByNombre(name);
+	}
 
 }

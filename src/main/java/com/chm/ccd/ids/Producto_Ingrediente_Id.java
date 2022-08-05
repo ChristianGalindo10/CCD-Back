@@ -5,10 +5,16 @@ import java.io.Serializable;
 public class Producto_Ingrediente_Id implements Serializable{
 	
 	private Integer idProducto;
-	private Integer idIngrediente;
+	private Long idIngrediente;
 	
-	public Producto_Ingrediente_Id(Integer idProducto,Integer idIngrediente) {
+	public Producto_Ingrediente_Id(Integer idProducto,Long idIngrediente) {
 		this.idProducto = idProducto;
 		this.idIngrediente = idIngrediente;
 	}
+
+	public Producto_Ingrediente_Id() {
+
+	}
+	
+	
 }

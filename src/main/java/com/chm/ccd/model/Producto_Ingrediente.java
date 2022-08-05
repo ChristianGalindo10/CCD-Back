@@ -2,24 +2,17 @@ package com.chm.ccd.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.OneToMany;
 
-import com.chm.ccd.ids.Pedido_Menu_Id;
+
+
 import com.chm.ccd.ids.Producto_Ingrediente_Id;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -33,7 +26,7 @@ public class Producto_Ingrediente {
 
     @Id
     @Column(name = "pk_idingrediente")
-    private Integer idIngrediente;
+    private Long idIngrediente;
 
     @NotNull
     @Column(name = "q_cantidad")
@@ -49,7 +42,14 @@ public class Producto_Ingrediente {
     @JsonBackReference
     private Ingrediente ingrediente;
     
+    public Producto_Ingrediente() {}
     
+	public Producto_Ingrediente(Integer idProducto, Long idIngrediente, Integer cantidad) {
+		this.idProducto = idProducto;
+		this.idIngrediente = idIngrediente;
+		this.cantidad = cantidad;
+	}
+
 	public Integer getIdProducto() {
 		return idProducto;
 	}
@@ -58,11 +58,11 @@ public class Producto_Ingrediente {
 		this.idProducto = idProducto;
 	}
 
-	public Integer getIdIngrediente() {
+	public Long getIdIngrediente() {
 		return idIngrediente;
 	}
 
-	public void setIdIngrediente(Integer idIngrediente) {
+	public void setIdIngrediente(Long idIngrediente) {
 		this.idIngrediente = idIngrediente;
 	}
 

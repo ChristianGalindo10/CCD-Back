@@ -1,5 +1,7 @@
 package com.chm.ccd.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.chm.ccd.db.RepositorioProducto;
@@ -12,8 +14,12 @@ public class ServicioProducto {
 	@Autowired
     RepositorioProducto productRepository;
 	
-	public void save(Producto producto){
-		productRepository.save(producto);
+	public Producto save(Producto producto){
+		return productRepository.save(producto);
+    }
+	
+	public Optional<Producto> getByName(String name){
+        return productRepository.findByNombre(name);
     }
 	
 
