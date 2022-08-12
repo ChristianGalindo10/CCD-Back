@@ -37,4 +37,8 @@ public class ServicioRestaurante {
 	public Optional<Restaurante> getByName(String name){
         return restaurantRepository.findByNombre(name);
     }
+	
+	public Restaurante getByNit(Long nit){
+        return restaurantRepository.findByNit(nit).get();
+    }
 }

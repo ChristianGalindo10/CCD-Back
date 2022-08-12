@@ -3,7 +3,6 @@ package com.chm.ccd.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.zip.Deflater;
 
 
@@ -21,15 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.chm.ccd.db.RepositorioIngrediente;
 import com.chm.ccd.db.RepositorioProducto;
 import com.chm.ccd.model.Ingrediente;
 import com.chm.ccd.model.Producto;
 import com.chm.ccd.model.Producto_Ingrediente;
+import com.chm.ccd.model.Restaurante_Producto;
 import com.chm.ccd.security.dto.Message;
 import com.chm.ccd.service.ServicioIngrediente;
 import com.chm.ccd.service.ServicioProducto;
 import com.chm.ccd.service.ServicioProductoIngrediente;
+import com.chm.ccd.service.ServicioRestauranteProducto;
 
 
 @RestController
@@ -48,6 +48,9 @@ public class ControladorProducto {
     
     @Autowired
     ServicioProductoIngrediente productIngredientService;
+    
+    @Autowired
+    ServicioRestauranteProducto restaurantProductService;
 	
 	@Autowired
     PasswordEncoder passwordEncoder;
@@ -58,8 +61,18 @@ public class ControladorProducto {
 	public List<Producto> getProductos() {
 		return repositorioProducto.findAll();
 	}
+	
+	@GetMapping("/getProducts")
+	public List<Producto> getProductosByNit(@RequestParam Long nit) {
+		//System.out.println(nit);
+		List<Producto> productos = productService.getProductsByNit(nit);
+		System.out.println(productos.size());
+		return productService.getProductsByNit(nit);
+	}
+	
 	@PostMapping("/upload")
 	public ResponseEntity<Message> uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
+		this.bytes = null;
 		this.bytes = file.getBytes();
 		//this.bytes = compressBytes(file.getBytes());
 		System.out.println("Original Image Byte Size - " + file.getBytes().length);
@@ -88,17 +101,19 @@ public class ControladorProducto {
 	
 	@Transactional
 	@PostMapping("/newproduct")
-	public ResponseEntity<?> nuevoProducto(@RequestParam Long nit,@RequestBody Producto nuevoProducto, @RequestParam String[] ingredientes){
+	public ResponseEntity<?> nuevoProducto(@RequestParam Integer stock, @RequestParam Long nit,@RequestBody Producto nuevoProducto, @RequestParam String[] ingredientes){
 		System.out.println(nit);
 		nuevoProducto.setPicByte(this.bytes);
 		System.out.println(ingredientes.length);
 		Producto productoGuardado = productService.save(nuevoProducto);
+		Restaurante_Producto rp = new Restaurante_Producto(nit, productoGuardado.getIdProducto(), stock);
+		restaurantProductService.save(rp);
 		for(int i=0;i<ingredientes.length;i+=2) {
 			String nombre = ingredientes[i];
 			int cantidad = Integer.parseInt (ingredientes[i+1]);
 			Ingrediente ingrediente = ingredientService.getByName(nombre).get();
 			//Producto_Ingrediente pIngrediente = new Producto_Ingrediente(productoGuardado.getIdProducto(),ingrediente.getIdIngrediente(),cantidad);
-			Producto_Ingrediente pIngrediente = new Producto_Ingrediente(58,ingrediente.getIdIngrediente(),cantidad);
+			Producto_Ingrediente pIngrediente = new Producto_Ingrediente(productoGuardado.getIdProducto(),ingrediente.getIdIngrediente(),cantidad);
 			productIngredientService.save(pIngrediente);
 		}
 		System.out.println(productoGuardado.getIdProducto());

@@ -1,6 +1,5 @@
 package com.chm.ccd.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,11 +14,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -52,12 +53,16 @@ public class Menu {
 	@JsonBackReference
     private Restaurante restaurante;
 	
+	@Transient
+	private long nit;
+	
 	@OneToMany(mappedBy = "menu",fetch = FetchType.EAGER)
-	@JsonManagedReference
+	//@JsonManagedReference
+	@JsonIgnore
     private List<Pedido_Menu> pedidos_menus;
     
     @JoinTable(
-	        name = "Producto_Menu",
+	        name = "producto_menu",
 	        joinColumns = @JoinColumn(name = "pk_idmenu", nullable = false),
 	        inverseJoinColumns = @JoinColumn(name="pk_idproducto", nullable = false)
 	    )
@@ -66,6 +71,11 @@ public class Menu {
 	
 	public Restaurante getRestaurante() {
 		return restaurante;
+	}
+	
+	@JsonProperty 
+	public Long getRestaurantNit(){ 
+		return restaurante.getNit();
 	}
 
 	public void setRestaurante(Restaurante restaurante) {
@@ -79,7 +89,7 @@ public class Menu {
 	public void setPedidos_menus(List<Pedido_Menu> pedidos_menus) {
 		this.pedidos_menus = pedidos_menus;
 	}
-
+/*
 	public Menu() {}
 
 	public Menu(@NotNull String nombre,@NotNull boolean personalizable,byte[] picByte,@NotNull Long precio){
@@ -87,7 +97,7 @@ public class Menu {
 		this.personalizable = personalizable;
 		this.picByte = picByte;
 		this.precio = precio;
-	}
+	}*/
 
 	public int getIdMenu() {
 		return idMenu;
@@ -128,6 +138,23 @@ public class Menu {
 	public void setPrecio(Long precio) {
 		this.precio = precio;
 	}
+
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
+	public long getNit() {
+		return nit;
+	}
+
+	public void setNit(long nit) {
+		this.nit = nit;
+	}
+	
 	
 	
 	

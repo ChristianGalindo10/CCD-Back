@@ -11,4 +11,10 @@ public class Restaurante_Producto_Id implements Serializable{
 		this.idProducto = idProducto;
 		this.nit = nit;
 	}
+
+	public Restaurante_Producto_Id() {
+
+	}
+	
+	
 }

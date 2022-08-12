@@ -1,5 +1,6 @@
 package com.chm.ccd.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,10 @@ public class ServicioProducto {
 	public Optional<Producto> getByName(String name){
         return productRepository.findByNombre(name);
     }
+	
+	public List<Producto> getProductsByNit(Long nit){
+		return productRepository.findProductsByNit(nit);
+	}
 	
 
 }

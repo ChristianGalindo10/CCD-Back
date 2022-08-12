@@ -40,6 +40,18 @@ public class Restaurante_Producto {
     @JoinColumn(name = "pk_nit",insertable = false, updatable = false)
     @JsonBackReference
     private Restaurante restaurante;
+    
+	public Restaurante_Producto() {}
+	
+	
+
+	public Restaurante_Producto(Long nit, Integer idProducto, Integer stock) {
+		this.nit = nit;
+		this.idProducto = idProducto;
+		this.stock = stock;
+	}
+
+
 
 	public Long getNit() {
 		return nit;
