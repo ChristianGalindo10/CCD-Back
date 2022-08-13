@@ -1,6 +1,5 @@
 package com.chm.ccd.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chm.ccd.db.RepositorioRestaurante;
+import com.chm.ccd.db.RepositorioRestauranteProducto;
 import com.chm.ccd.model.Restaurante;
+import com.chm.ccd.model.Restaurante_Producto;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -24,9 +25,17 @@ public class ControladorRestaurante {
 	@Autowired
     PasswordEncoder passwordEncoder;
 	
+	@Autowired
+    RepositorioRestauranteProducto restaurantProductRepository;
+	
 	@GetMapping("/get")
 	public List<Restaurante> getRestaurantes() {
 		return repositorioRestaurante.findAll();
+	}
+	
+	@GetMapping("/getAllProducts")
+	public List<Restaurante_Producto> getRestaurantesProductos() {
+		return restaurantProductRepository.findAll();
 	}
 	
 

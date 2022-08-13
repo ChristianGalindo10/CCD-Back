@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chm.ccd.db.RepositorioRestaurante;
+import com.chm.ccd.db.RepositorioRestauranteProducto;
 import com.chm.ccd.model.Restaurante;
 
 @Service
@@ -17,6 +18,8 @@ public class ServicioRestaurante {
 	
 	@Autowired
     RepositorioRestaurante restaurantRepository;
+	
+
 	
 	public Optional<Restaurante> getByEmail(String email){
         return restaurantRepository.findByEmail(email);
@@ -41,4 +44,5 @@ public class ServicioRestaurante {
 	public Restaurante getByNit(Long nit){
         return restaurantRepository.findByNit(nit).get();
     }
+	
 }

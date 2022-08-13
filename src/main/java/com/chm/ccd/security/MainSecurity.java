@@ -70,7 +70,7 @@ public class MainSecurity{
 		http.headers().frameOptions().sameOrigin();*/
         
 
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers("/auth/**")
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers("/auth/**","/productos/get","/menus/get","/restaurantes/get","/ingredientes/get")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(jwtEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
