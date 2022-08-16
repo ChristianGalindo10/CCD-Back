@@ -42,7 +42,7 @@ public class ServicioRestaurante {
     }
 	
 	public Restaurante getByNit(Long nit){
-        return restaurantRepository.findByNit(nit).get();
+        return restaurantRepository.findByNit(nit);
     }
 	
 }

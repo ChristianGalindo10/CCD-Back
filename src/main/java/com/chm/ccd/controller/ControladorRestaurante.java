@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chm.ccd.db.RepositorioMenu;
 import com.chm.ccd.db.RepositorioRestaurante;
 import com.chm.ccd.db.RepositorioRestauranteProducto;
+import com.chm.ccd.model.Menu;
 import com.chm.ccd.model.Restaurante;
 import com.chm.ccd.model.Restaurante_Producto;
 
@@ -28,6 +30,9 @@ public class ControladorRestaurante {
 	@Autowired
     RepositorioRestauranteProducto restaurantProductRepository;
 	
+	@Autowired
+    RepositorioMenu MenuRepository;
+	
 	@GetMapping("/get")
 	public List<Restaurante> getRestaurantes() {
 		return repositorioRestaurante.findAll();
@@ -36,6 +41,11 @@ public class ControladorRestaurante {
 	@GetMapping("/getAllProducts")
 	public List<Restaurante_Producto> getRestaurantesProductos() {
 		return restaurantProductRepository.findAll();
+	}
+	
+	@GetMapping("/getAllMenus")
+	public List<Menu> getMenus() {
+		return MenuRepository.findAll();
 	}
 	
 

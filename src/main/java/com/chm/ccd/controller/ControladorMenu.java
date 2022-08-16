@@ -23,8 +23,10 @@ import com.chm.ccd.model.Ingrediente;
 import com.chm.ccd.model.Menu;
 import com.chm.ccd.model.Producto;
 import com.chm.ccd.model.Producto_Ingrediente;
+import com.chm.ccd.model.Restaurante;
 import com.chm.ccd.model.Restaurante_Producto;
 import com.chm.ccd.security.dto.Message;
+import com.chm.ccd.service.ServicioMenu;
 import com.chm.ccd.service.ServicioRestaurante;
 
 
@@ -39,9 +41,21 @@ public class ControladorMenu {
 	@Autowired
 	private ServicioRestaurante servicioRestaurante;
 	
+	@Autowired
+	private ServicioMenu servicioMenu;
+	
 	@GetMapping("/get")
 	public List<Menu> getMenus() {
+		//System.out.println(nit);
 		return repositorioMenu.findAll();
+	}
+	
+	@GetMapping("/getMenus")
+	public List<Menu> getMenusByNit(@RequestParam Long nit) {
+		//System.out.println(nit);
+		List<Menu> menus = servicioMenu.getMenusByNit(nit);
+		System.out.println(menus.size());
+		return servicioMenu.getMenusByNit(nit);
 	}
 	
 	private byte[] bytes;
@@ -84,5 +98,11 @@ public class ControladorMenu {
 		repositorioMenu.save(menu);
 		this.bytes = null;
 		return new ResponseEntity<Message>(new Message("Menú guardado"), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/getNameMenuRestaurant")
+	public Restaurante getNameRestaurant(@RequestParam Long id) throws IOException {
+		System.out.println(id);
+		return servicioRestaurante.getByNit(id);
 	}
 }

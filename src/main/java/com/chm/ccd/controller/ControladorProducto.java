@@ -24,11 +24,13 @@ import com.chm.ccd.db.RepositorioProducto;
 import com.chm.ccd.model.Ingrediente;
 import com.chm.ccd.model.Producto;
 import com.chm.ccd.model.Producto_Ingrediente;
+import com.chm.ccd.model.Restaurante;
 import com.chm.ccd.model.Restaurante_Producto;
 import com.chm.ccd.security.dto.Message;
 import com.chm.ccd.service.ServicioIngrediente;
 import com.chm.ccd.service.ServicioProducto;
 import com.chm.ccd.service.ServicioProductoIngrediente;
+import com.chm.ccd.service.ServicioRestaurante;
 import com.chm.ccd.service.ServicioRestauranteProducto;
 
 
@@ -47,6 +49,9 @@ public class ControladorProducto {
     ServicioIngrediente ingredientService;
     
     @Autowired
+    ServicioRestaurante restaurantService;
+    
+    @Autowired
     ServicioProductoIngrediente productIngredientService;
     
     @Autowired
@@ -54,6 +59,8 @@ public class ControladorProducto {
 	
 	@Autowired
     PasswordEncoder passwordEncoder;
+	
+	
 	
     private byte[] bytes;
 	
@@ -119,5 +126,14 @@ public class ControladorProducto {
 		System.out.println(productoGuardado.getIdProducto());
 		this.bytes = null;
 		return new ResponseEntity<Message>(new Message("Producto guardado"), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/getNameProductRestaurant")
+	public Restaurante getNameRestaurant(@RequestParam Integer id) throws IOException {
+		System.out.println(id);
+		Restaurante_Producto restaurante_producto= new Restaurante_Producto();
+		restaurante_producto=restaurantProductService.getProducto(id);
+		System.out.println(restaurante_producto.getNit());
+		return restaurantService.getByNit(restaurante_producto.getNit());
 	}
 }

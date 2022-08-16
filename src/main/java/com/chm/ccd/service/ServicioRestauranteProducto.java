@@ -15,4 +15,8 @@ public class ServicioRestauranteProducto {
 	public void save(Restaurante_Producto restauranteProducto){
 		restaurantProductRepository.save(restauranteProducto);
     }
+	
+	public Restaurante_Producto getProducto(Integer id){
+		return restaurantProductRepository.findById(id);
+    }
 }
