@@ -27,5 +27,9 @@ public class ServicioProducto {
 		return productRepository.findProductsByNit(nit);
 	}
 	
+	public List<Producto> getProductsByMenu(int idm){
+		return productRepository.findProductsByMenu(idm);
+	}
+	
 
 }

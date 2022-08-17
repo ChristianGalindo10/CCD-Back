@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
 
@@ -41,6 +43,9 @@ public class Ingrediente {
 	@OneToMany(mappedBy = "ingrediente",fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Producto_Ingrediente> producto_ingredientes;
+    
+    @Transient
+	private Integer cantidad;
 	
 	public Ingrediente() {}
 
@@ -49,8 +54,17 @@ public class Ingrediente {
 		this.unidadMedida = unidadMedida;
 		this.nombre = nombre;
 	}
-
 	
+
+	@JsonProperty 
+	public Integer getCantidad(){ 
+		return cantidad;
+	}
+	
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	public List<Producto_Ingrediente> getProducto_ingredientes() {
 		return producto_ingredientes;
 	}

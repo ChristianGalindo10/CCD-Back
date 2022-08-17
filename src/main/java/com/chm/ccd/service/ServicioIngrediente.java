@@ -1,5 +1,6 @@
 package com.chm.ccd.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class ServicioIngrediente {
 	
 	public Optional<Ingrediente> getByName(String name){
 		return ingredientRepository.findByNombre(name);
+	}
+	
+	public List<Ingrediente> getIngredientsByProduct(Integer pid){
+		return ingredientRepository.findIngredientsByProduct(pid);
 	}
 
 }

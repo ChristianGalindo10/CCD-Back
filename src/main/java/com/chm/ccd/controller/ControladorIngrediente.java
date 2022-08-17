@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chm.ccd.db.RepositorioIngrediente;
 import com.chm.ccd.model.Ingrediente;
+import com.chm.ccd.model.Producto;
 import com.chm.ccd.security.dto.Message;
 import com.chm.ccd.service.ServicioIngrediente;
+import com.chm.ccd.service.ServicioProductoIngrediente;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -30,11 +33,24 @@ public class ControladorIngrediente {
 	
     @Autowired
     ServicioIngrediente ingredientService;
+    
+    @Autowired
+    ServicioProductoIngrediente productIngredientService;
 	
 	@GetMapping("/get")
 	public List<Ingrediente> getIngredients() {
 		return repositorioIngrediente.findAll();
 	}
+	
+	@GetMapping("/getIngredients")
+	public List<Ingrediente> getIngredientsByProduct(@RequestParam Integer pid) {
+		List<Ingrediente> ingredientes = ingredientService.getIngredientsByProduct(pid);
+		for (Ingrediente i: ingredientes) {
+			i.setCantidad(productIngredientService.getQuantity(pid));
+		}
+		return ingredientes;
+	}
+	
 	@PostMapping("/newingredient")
 	public ResponseEntity<?> nuevoIngrediente(@Valid @RequestBody Ingrediente nuevoIngrediente ,BindingResult bindingResult){
 		if(bindingResult.hasErrors())

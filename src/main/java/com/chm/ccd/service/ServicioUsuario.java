@@ -21,6 +21,10 @@ public class ServicioUsuario {
         return usuarioRepository.findByEmail(email);
     }
 	
+	public Optional<Usuario> getById(Long id){
+        return usuarioRepository.findById(id);
+    }
+	
 	public boolean existsByEmail(String email) {
 		return usuarioRepository.existsByEmail(email);
 	}

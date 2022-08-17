@@ -37,4 +37,15 @@ public class Pedido_Menu {
     @JoinColumn(name = "pk_idpedido",insertable = false, updatable = false)
     @JsonBackReference
     private Pedido pedido;
+
+	public Pedido_Menu(Integer idPedido, Integer idMenu, Integer cantidad) {
+		super();
+		this.idPedido = idPedido;
+		this.idMenu = idMenu;
+		this.cantidad = cantidad;
+	}
+	
+	public Pedido_Menu() {}
+    
+    
 }

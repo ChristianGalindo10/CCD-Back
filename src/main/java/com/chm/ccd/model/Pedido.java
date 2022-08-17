@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
@@ -49,32 +50,34 @@ public class Pedido {
 	private Usuario usuario;
 
 	@OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
-	@JsonManagedReference
+	//@JsonManagedReference
+	@JsonIgnore
 	private List<Pedido_Producto> pedidos_productos;
 	
 	@OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
-	@JsonManagedReference
+	//@JsonManagedReference
+	@JsonIgnore
 	private List<Pedido_Menu> pedidos_menus;
 	
 	@JoinTable(
-	        name = "Pedido_Restaurante",
-	        joinColumns = @JoinColumn(name = "pk_nit", nullable = false),
-	        inverseJoinColumns = @JoinColumn(name="pk_idpedido", nullable = false)
+	        name = "pedido_restaurante",
+	        joinColumns = @JoinColumn(name = "pk_idpedido", nullable = false),
+	        inverseJoinColumns = @JoinColumn(name="pk_nit", nullable = false)
 	    )
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Restaurante> restaurantes;
 
-	// @Transient
-	// private Long idUsuario;
+	@Transient
+	private Long idUsuario;
 
-	public Pedido() {
+	/*public Pedido() {
 	}
 
 	public Pedido(@NotNull Long monto, @NotNull String direccion, @NotNull LocalDate fecha) {
 		this.monto = monto;
 		this.direccion = direccion;
 		this.fecha = fecha;
-	}
+	}*/
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -115,5 +118,23 @@ public class Pedido {
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
+	public List<Restaurante> getRestaurantes() {
+		return restaurantes;
+	}
+
+	public void setRestaurantes(List<Restaurante> restaurantes) {
+		this.restaurantes = restaurantes;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
+	
 
 }

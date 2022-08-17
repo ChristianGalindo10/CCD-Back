@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+
 import com.chm.ccd.model.Producto;
 
 public interface RepositorioProducto extends JpaRepository<Producto, Integer>{
@@ -17,4 +18,9 @@ public interface RepositorioProducto extends JpaRepository<Producto, Integer>{
 	List<Producto> findProductsByNit(@Param("nit") Long nit);
 	
 	Optional<Producto> findByNombre(String name);
+	
+	@Query(value = "SELECT producto.* FROM producto INNER JOIN producto_menu "
+			+ "ON producto.pk_idproducto=producto_menu.pk_idproducto "
+			+ "WHERE producto_menu.pk_idmenu=:idm", nativeQuery = true)
+	List<Producto> findProductsByMenu(@Param("idm") int idm);
 }

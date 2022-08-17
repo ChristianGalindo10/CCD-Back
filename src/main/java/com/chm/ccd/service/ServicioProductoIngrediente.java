@@ -1,5 +1,6 @@
 package com.chm.ccd.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +16,9 @@ public class ServicioProductoIngrediente {
 	public void save(Producto_Ingrediente productoIngrediente){
 		productIngredientRepository.save(productoIngrediente);
     }
+	
+	public Integer getQuantity(Integer pid){
+		Producto_Ingrediente p = productIngredientRepository.findByIdProducto(pid).get();
+		return p.getCantidad();
+	}
 }

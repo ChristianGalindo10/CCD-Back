@@ -17,7 +17,7 @@ public class SesionUsuario implements UserDetails{
     private Collection<? extends GrantedAuthority> authorities;
     
     public SesionUsuario(String nombre,  String password, String email ,Collection<? extends GrantedAuthority> authorities) {
-        this.name = nombre;
+    	this.name = nombre;
         this.password = password;
         this.email = email;
         this.authorities = authorities;
@@ -79,5 +79,8 @@ public class SesionUsuario implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
+
+	
+	
 
 }

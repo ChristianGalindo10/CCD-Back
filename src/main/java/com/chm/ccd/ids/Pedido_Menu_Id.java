@@ -11,6 +11,11 @@ public class Pedido_Menu_Id implements Serializable{
 		this.idPedido = idPedido;
 		this.idMenu = idMenu;
 	}
+
+	public Pedido_Menu_Id() {
+	}
+	
+	
 	
 	
 }

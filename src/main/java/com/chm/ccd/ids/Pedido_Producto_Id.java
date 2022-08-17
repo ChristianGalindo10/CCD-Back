@@ -11,4 +11,9 @@ public class Pedido_Producto_Id implements Serializable{
 		this.idPedido = idPedido;
 		this.idProducto = idProducto;
 	}
+
+	public Pedido_Producto_Id() {
+	}
+	
+	
 }

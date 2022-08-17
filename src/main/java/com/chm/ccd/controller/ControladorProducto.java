@@ -77,6 +77,12 @@ public class ControladorProducto {
 		return productService.getProductsByNit(nit);
 	}
 	
+	@GetMapping("/getMenuProducts")
+	public List<Producto> getProductosByMenu(@RequestParam int idm) {
+		//System.out.println(nit);
+		return productService.getProductsByMenu(idm);
+	}
+	
 	@PostMapping("/upload")
 	public ResponseEntity<Message> uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
 		this.bytes = null;

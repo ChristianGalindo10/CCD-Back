@@ -101,7 +101,15 @@ public class ControladorAutenticacion {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtProvider.generateToken(authentication);
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+		Long id = (long) 0;
+		if(usuarioService.getByEmail(loginUsuario.getEmail()).isPresent()) {
+			Usuario usuario = usuarioService.getByEmail(loginUsuario.getEmail()).get();
+			id = usuario.getId();
+		}else if(restaurantService.getByEmail(loginUsuario.getEmail()).isPresent()){
+			Restaurante usuario = restaurantService.getByEmail(loginUsuario.getEmail()).get();
+			id = usuario.getNit();
+		}
+		JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities(),id);
 		return new ResponseEntity(jwtDto, HttpStatus.OK);
 	}
     

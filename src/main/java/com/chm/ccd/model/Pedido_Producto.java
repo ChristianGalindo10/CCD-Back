@@ -40,6 +40,15 @@ public class Pedido_Producto {
     @JoinColumn(name = "pk_idpedido",insertable = false, updatable = false)
     @JsonBackReference
     private Pedido pedido;
+    
+    public Pedido_Producto() {
+	}
+
+	public Pedido_Producto(Integer idPedido, Integer idProducto, Integer cantidad) {
+		this.idPedido = idPedido;
+		this.idProducto = idProducto;
+		this.cantidad = cantidad;
+	}
 
 	public Integer getIdPedido() {
 		return idPedido;
