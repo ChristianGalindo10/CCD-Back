@@ -22,12 +22,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.chm.ccd.db.RepositorioProducto;
 import com.chm.ccd.model.Ingrediente;
+import com.chm.ccd.model.Menu;
 import com.chm.ccd.model.Producto;
 import com.chm.ccd.model.Producto_Ingrediente;
 import com.chm.ccd.model.Restaurante;
 import com.chm.ccd.model.Restaurante_Producto;
 import com.chm.ccd.security.dto.Message;
 import com.chm.ccd.service.ServicioIngrediente;
+import com.chm.ccd.service.ServicioPedidoProducto;
 import com.chm.ccd.service.ServicioProducto;
 import com.chm.ccd.service.ServicioProductoIngrediente;
 import com.chm.ccd.service.ServicioRestaurante;
@@ -56,6 +58,9 @@ public class ControladorProducto {
     
     @Autowired
     ServicioRestauranteProducto restaurantProductService;
+    
+    @Autowired
+    ServicioPedidoProducto pedidoProductService;
 	
 	@Autowired
     PasswordEncoder passwordEncoder;
@@ -81,6 +86,16 @@ public class ControladorProducto {
 	public List<Producto> getProductosByMenu(@RequestParam int idm) {
 		//System.out.println(nit);
 		return productService.getProductsByMenu(idm);
+	}
+	
+	@GetMapping("/getPedidoProducts")
+	public List<Producto> getProductosByPedido(@RequestParam int idp) {
+		List<Producto> productos = productService.getProductsByPedido(idp);
+		for (Producto p:productos) {
+			p.setCantidad(pedidoProductService.getQuantity(idp,p.getIdProducto()));
+		}
+		return productos;
+		//return productService.getProductsByPedido(idp);
 	}
 	
 	@PostMapping("/upload")

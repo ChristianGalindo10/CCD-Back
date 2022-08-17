@@ -46,6 +46,16 @@ public class Pedido_Menu {
 	}
 	
 	public Pedido_Menu() {}
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+	
+	
     
     
 }

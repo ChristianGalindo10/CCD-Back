@@ -27,6 +27,7 @@ import com.chm.ccd.model.Restaurante;
 import com.chm.ccd.model.Restaurante_Producto;
 import com.chm.ccd.security.dto.Message;
 import com.chm.ccd.service.ServicioMenu;
+import com.chm.ccd.service.ServicioPedidoMenu;
 import com.chm.ccd.service.ServicioRestaurante;
 
 
@@ -44,6 +45,9 @@ public class ControladorMenu {
 	@Autowired
 	private ServicioMenu servicioMenu;
 	
+	@Autowired
+	private ServicioPedidoMenu pedidoMenuService;
+	
 	@GetMapping("/get")
 	public List<Menu> getMenus() {
 		//System.out.println(nit);
@@ -56,6 +60,16 @@ public class ControladorMenu {
 		List<Menu> menus = servicioMenu.getMenusByNit(nit);
 		System.out.println(menus.size());
 		return servicioMenu.getMenusByNit(nit);
+	}
+	
+	@GetMapping("/getPedidoMenus")
+	public List<Menu> getMenuByPedido(@RequestParam int idp) {
+		List<Menu> menus = servicioMenu.getMenusByPedido(idp);
+		for (Menu m: menus) {
+			m.setCantidad(pedidoMenuService.getQuantity(idp,m.getIdMenu()));
+		}
+		return menus;
+		//return servicioMenu.getMenusByPedido(idp);
 	}
 	
 	private byte[] bytes;

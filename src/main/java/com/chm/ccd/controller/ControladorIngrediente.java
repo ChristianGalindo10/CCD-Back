@@ -46,7 +46,7 @@ public class ControladorIngrediente {
 	public List<Ingrediente> getIngredientsByProduct(@RequestParam Integer pid) {
 		List<Ingrediente> ingredientes = ingredientService.getIngredientsByProduct(pid);
 		for (Ingrediente i: ingredientes) {
-			i.setCantidad(productIngredientService.getQuantity(pid));
+			i.setCantidad(productIngredientService.getQuantity(pid,i.getIdIngrediente()));
 		}
 		return ingredientes;
 	}

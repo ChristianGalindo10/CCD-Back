@@ -13,11 +13,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -64,6 +66,18 @@ public class Producto {
     @ManyToMany(mappedBy = "productos",fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Menu> menus;
+    
+    @Transient
+	private Integer cantidad;
+	
+	@JsonProperty 
+	public Integer getCantidad(){ 
+		return cantidad;
+	}
+	
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
     
 
 	public Producto() {}

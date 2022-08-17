@@ -15,5 +15,10 @@ public class ServicioPedidoProducto {
 	public void save(Pedido_Producto pedidoProducto){
 		pedidoProductRepository.save(pedidoProducto);
     }
+	
+	public Integer getQuantity(int idp,Integer pid){
+		Pedido_Producto p = pedidoProductRepository.findByIdProducto(idp,pid).get();
+		return p.getCantidad();
+	}
 
 }

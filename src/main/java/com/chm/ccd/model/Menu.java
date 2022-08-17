@@ -56,6 +56,18 @@ public class Menu {
 	@Transient
 	private long nit;
 	
+	@Transient
+	private Integer cantidad;
+	
+	@JsonProperty 
+	public Integer getCantidad(){ 
+		return cantidad;
+	}
+	
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+	
 	@OneToMany(mappedBy = "menu",fetch = FetchType.EAGER)
 	//@JsonManagedReference
 	@JsonIgnore

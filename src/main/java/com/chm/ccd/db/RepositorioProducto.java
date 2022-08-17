@@ -23,4 +23,9 @@ public interface RepositorioProducto extends JpaRepository<Producto, Integer>{
 			+ "ON producto.pk_idproducto=producto_menu.pk_idproducto "
 			+ "WHERE producto_menu.pk_idmenu=:idm", nativeQuery = true)
 	List<Producto> findProductsByMenu(@Param("idm") int idm);
+	
+	@Query(value = "SELECT producto.* FROM producto INNER JOIN pedido_producto "
+			+ "ON producto.pk_idproducto=pedido_producto.pk_idproducto "
+			+ "WHERE pedido_producto.pk_idpedido=:idp", nativeQuery = true)
+	List<Producto> findProductsByPedido(@Param("idp") int idp);
 }

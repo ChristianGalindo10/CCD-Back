@@ -17,8 +17,8 @@ public class ServicioProductoIngrediente {
 		productIngredientRepository.save(productoIngrediente);
     }
 	
-	public Integer getQuantity(Integer pid){
-		Producto_Ingrediente p = productIngredientRepository.findByIdProducto(pid).get();
+	public Integer getQuantity(Integer pid, Long iid){
+		Producto_Ingrediente p = productIngredientRepository.findByIdProducto(pid,iid).get();
 		return p.getCantidad();
 	}
 }

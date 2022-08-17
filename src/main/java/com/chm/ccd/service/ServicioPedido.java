@@ -21,4 +21,8 @@ public class ServicioPedido {
 	public List<Pedido> getPedidosById(Long id){
 		return pedidoRepository.findPedidosById(id);
 	}
+	
+	public List<Pedido> getPedidosByNit(Long nit){
+		return pedidoRepository.findPedidosByNit(nit);
+	}
 }

@@ -79,7 +79,12 @@ public class ControladorPedido {
 	}
 	
 	@GetMapping("/getPedidos")
-	public List<Pedido> getMenusByNit(@RequestParam Long id) {
+	public List<Pedido> getPedidosById(@RequestParam Long id) {
 		return pedidoService.getPedidosById(id);
+	}
+	
+	@GetMapping("/getPedidosR")
+	public List<Pedido> getPedidosByIdR(@RequestParam Long nit) {
+		return pedidoService.getPedidosByNit(nit);
 	}
 }

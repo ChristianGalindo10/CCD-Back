@@ -19,5 +19,9 @@ public class ServicioMenu {
 	public List<Menu> getMenusByNit(Long nit){
 		return menuRepository.findMenusByNit(nit);
 	}
+	
+	public List<Menu> getMenusByPedido(int idp){
+		return menuRepository.findMenusByPedido(idp);
+	}
 
 }

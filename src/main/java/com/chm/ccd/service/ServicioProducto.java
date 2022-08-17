@@ -31,5 +31,9 @@ public class ServicioProducto {
 		return productRepository.findProductsByMenu(idm);
 	}
 	
+	public List<Producto> getProductsByPedido(int idp){
+		return productRepository.findProductsByPedido(idp);
+	}
+	
 
 }
